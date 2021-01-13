@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="Lea Rosema")
+    meta(name="keywords", content="Eleventy, Static Site Generator")
+    link(rel="stylesheet", href="prism/prism.css")
+    link(rel="stylesheet", href="css/index.css")
+    title Eleventy in Eleven Minutes
+  body
+    main
+      include:slides:markdown-it content/slides.md
+    script(src="prism/prism.js")
+    script(src="scrolly.js")

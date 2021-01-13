@@ -1,0 +1,33 @@
+{
+  "name": "eleventy-talk",
+  "version": "1.0.0",
+  "description": "## A talk for the engineering all hands meeting at SinnerSchrader",
+  "main": "pug.config.js",
+  "scripts": {
+    "prestart": "npm run copy-js -s",
+    "start": "concurrently 'npm:watch-css' 'npm:watch-html' 'npm:serve'",
+    "build": "npm run clean && npm run copy-js -s && npm run build-css && npm run build-html",
+    "copy-js": "mkdir -p public && cp src/scrolly.js public && cp -r src/prism public/prism",
+    "build-html": "pug src/index.pug -O pug.config.js -o public",
+    "watch-html": "pug src/index.pug -O pug.config.js -o public -w",
+    "build-css": "sass src/scss/:public/css/",
+    "watch-css": "sass src/scss/:public/css/ --watch",
+    "serve": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf public && mkdir public",
+    "predeploy": "npm run build",
+    "deploy": "touch public/.nojekyll && gh-pages -d public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.13",
+    "concurrently": "^5.3.0",
+    "gh-pages": "^3.1.0",
+    "jstransformer-markdown-it": "^2.1.0",
+    "pug": "^3.0.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "sass": "^1.32.4"
+  }
+}
