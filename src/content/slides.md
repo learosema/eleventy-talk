@@ -11,7 +11,7 @@ I haven't managed to do it in 11 slides
 - [https://lea.codes/](https://lea.codes/)
 - [https://codepen.io/terabaud/](https://codepen.io/terabaud/)
 - [https://twitter.com/terabaud](https://twitter.com/terabaud)
-- [https://terabaud.github.io/slides-webgl/](https://terabaud.github.io/eleventy-talk/)
+- [https://terabaud.github.io/eleventy-talk/](https://terabaud.github.io/eleventy-talk/)
 
 ---
 
