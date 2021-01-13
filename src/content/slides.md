@@ -26,7 +26,7 @@ I haven't managed to do it in 11 slides
 
 ```sh
 echo "# Hello World!" > index.md
-npx eleventy
+npx @11ty/eleventy
 ```
 
 but let's do something more exciting :)
@@ -246,7 +246,9 @@ tags: posts
 # Blog
 
 <ul>{% for post in collections.posts %}<li>
-  <a href="{{ post.url }}">{{ post.date | date: '%Y-%m-%d' }}: {{ post.data.title }}</a>
+  <a href="{{ post.url }}">
+    {{ post.date | date: '%Y-%m-%d' }}: {{ post.data.title }}
+  </a>
 </li>{% endfor %}</ul>
 ```
 ---
