@@ -186,7 +186,9 @@ tags: posts
 <pre><code class="language-md"># Blog
 
 &lt;ul&gt;{% for post in collections.posts %}&lt;li&gt;
-  &lt;a href=&quot;{{ post.url }}&quot;&gt;{{ post.date | date: '%Y-%m-%d' }}: {{ post.data.title }}&lt;/a&gt;
+  &lt;a href=&quot;{{ post.url }}&quot;&gt;
+    {{ post.date | date: '%Y-%m-%d' }}: {{ post.data.title }}
+  &lt;/a&gt;
 &lt;/li&gt;{% endfor %}&lt;/ul&gt;
 </code></pre>
 </section><section class="slide" id="slide_23" tabindex="-1">
