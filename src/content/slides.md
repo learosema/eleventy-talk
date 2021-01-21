@@ -248,9 +248,10 @@ tags: posts
 # Filters
 
 - [Built-in nunjucks filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters)
-- [url]() - prefix your URL
-- [slug]() - create slug from string
-- [get*CollectionItem]() - link to next/prev page
+- [url](https://www.11ty.dev/docs/filters/url/) - prefix your URL
+- [slug](https://www.11ty.dev/docs/filters/slug/) - create slug from string
+- [log](https://www.11ty.dev/docs/filters/log/) - console.log
+- [get*CollectionItem](https://www.11ty.dev/docs/filters/collection-items/) - link to next/prev page
 
 ---
 # Custom filters
