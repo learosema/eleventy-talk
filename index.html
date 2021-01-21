@@ -6,9 +6,6 @@
 <li>Junior Frontend Developer at S2</li>
 <li>Digital artist, addicted to <a target="_blank" rel="noopener noreferer" href="https://codepen.io">Codepen</a></li>
 <li><a target="_blank" rel="noopener noreferer" href="https://lea.codes/">https://lea.codes/</a></li>
-<li><a target="_blank" rel="noopener noreferer" href="https://codepen.io/terabaud/">https://codepen.io/terabaud/</a></li>
-<li><a target="_blank" rel="noopener noreferer" href="https://twitter.com/terabaud">https://twitter.com/terabaud</a></li>
-<li><a target="_blank" rel="noopener noreferer" href="https://terabaud.github.io/eleventy-talk/">https://terabaud.github.io/eleventy-talk/</a></li>
 </ul>
 </section><section class="slide" id="slide_3" tabindex="-1">
 <h1>What is Eleventy?</h1>
@@ -43,11 +40,11 @@ public
 </section><section class="slide" id="slide_7" tabindex="-1">
 <h1><code>.eleventy.js</code> Config</h1>
 <pre><code class="language-sh">module.exports = (config) =&gt; {
-  // specify folders to be copied to the output folder
   config.addPassthroughCopy('./src/js/');
   config.addPassthroughCopy('./src/css/');
-
   return {
+    markdownTemplateEngine: 'njk',
+    htmlTemplateEngine: 'njk',
     dir: {
       input: 'src',    // default: '.'
       output: 'public' // default: '_site'
@@ -114,12 +111,9 @@ blog/hello-world.md --&gt; /blog/hello-world/
 </code></pre>
 </section><section class="slide" id="slide_14" tabindex="-1">
 <h1>Includes</h1>
-<p>You can include partial layouts anywhere(*)
-in your njk or markdown files:</p>
+<p>You can include partial layouts anywhere in your njk or markdown files:</p>
 <pre><code class="language-html">{% include 'header.njk' %}
 </code></pre>
-<p>*to make includes work from inside markdown
-files, add <code>templateEngineOverride: njk,md</code> to the front matter</p>
 </section><section class="slide" id="slide_15" tabindex="-1">
 <h1>Everything about Nunjucks</h1>
 <ul>
@@ -144,7 +138,7 @@ files, add <code>templateEngineOverride: njk,md</code> to the front matter</p>
 ]
 </code></pre>
 </section><section class="slide" id="slide_18" tabindex="-1">
-<h1><code>_data</code> example part 2</h1>
+<h1><code>_data</code> usage</h1>
 <p><code>src/_includes/nav.njk</code></p>
 <pre><code class="language-html">&lt;nav&gt;
   &lt;ul&gt;
@@ -181,23 +175,50 @@ tags: posts
 ---
 </code></pre>
 </section><section class="slide" id="slide_22" tabindex="-1">
-<h1>Collections example part 2</h1>
+<h1>Collections usage</h1>
 <p><code>index.md</code></p>
 <pre><code class="language-md"># Blog
 
 &lt;ul&gt;{% for post in collections.posts %}&lt;li&gt;
   &lt;a href=&quot;{{ post.url }}&quot;&gt;
-    {{ post.date | date: '%Y-%m-%d' }}: {{ post.data.title }}
+    {{ post.date | date }}: {{ post.data.title }}
   &lt;/a&gt;
 &lt;/li&gt;{% endfor %}&lt;/ul&gt;
 </code></pre>
 </section><section class="slide" id="slide_23" tabindex="-1">
+<h1>Filters</h1>
+<ul>
+<li><a target="_blank" rel="noopener noreferer" href="https://mozilla.github.io/nunjucks/templating.html#builtin-filters">Built-in nunjucks filters</a></li>
+<li><a target="_blank" rel="noopener noreferer" href="">url</a> - prefix your URL</li>
+<li><a target="_blank" rel="noopener noreferer" href="">slug</a> - create slug from string</li>
+<li><a target="_blank" rel="noopener noreferer" href="">get*CollectionItem</a> - link to next/prev page</li>
+</ul>
+</section><section class="slide" id="slide_24" tabindex="-1">
+<h1>Custom filters</h1>
+<p><code>.eleventy.js</code></p>
+<pre><code class="language-js">const moment = require('moment');
+module.exports = (config) =&gt; {
+  config.addFilter('date', (date, format) =&gt; {
+    return moment(date).format(format || 'YYYY-MM-DD')
+  });
+  config.addFilter('scream', (str) =&gt; str.toUpperCase());
+  // ...additional config 
+  return { ... }
+};
+</code></pre>
+</section><section class="slide" id="slide_25" tabindex="-1">
+<h1>Using filters</h1>
+<p>In your template:</p>
+<pre><code class="language-html">{{ content | scream | safe }}`
+{{ page.date | date('YYYY-MM-DD') }}
+</code></pre>
+</section><section class="slide" id="slide_26" tabindex="-1">
 <h1>Personal example projects</h1>
 <ul>
 <li><a target="_blank" rel="noopener noreferer" href="https://github.com/terabaud/terabaud-website">https://github.com/terabaud/terabaud-website</a></li>
 <li><a target="_blank" rel="noopener noreferer" href="https://github.com/terabaud/lea-codes">httpd://github.com/terabaud/lea-codes</a></li>
 </ul>
-</section><section class="slide" id="slide_24" tabindex="-1">
+</section><section class="slide" id="slide_27" tabindex="-1">
 <h1>Thank you 👩‍💻</h1>
 <h2>Resources</h2>
 <ul>
