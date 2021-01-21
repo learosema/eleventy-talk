@@ -9,9 +9,6 @@ I haven't managed to do it in 11 slides
 - Junior Frontend Developer at S2
 - Digital artist, addicted to [Codepen](https://codepen.io)
 - [https://lea.codes/](https://lea.codes/)
-- [https://codepen.io/terabaud/](https://codepen.io/terabaud/)
-- [https://twitter.com/terabaud](https://twitter.com/terabaud)
-- [https://terabaud.github.io/eleventy-talk/](https://terabaud.github.io/eleventy-talk/)
 
 ---
 
@@ -59,11 +56,11 @@ public
 
 ```sh
 module.exports = (config) => {
-  // specify folders to be copied to the output folder
   config.addPassthroughCopy('./src/js/');
   config.addPassthroughCopy('./src/css/');
-
   return {
+    markdownTemplateEngine: 'njk',
+    htmlTemplateEngine: 'njk',
     dir: {
       input: 'src',    // default: '.'
       output: 'public' // default: '_site'
@@ -147,15 +144,11 @@ blog/hello-world.md --> /blog/hello-world/
 ---
 # Includes
 
-You can include partial layouts anywhere(*) 
-in your njk or markdown files:
+You can include partial layouts anywhere in your njk or markdown files:
 
 ```html
 {% include 'header.njk' %}
 ```
-
-*to make includes work from inside markdown
-files, add `templateEngineOverride: njk,md` to the front matter
 
 ---
 # Everything about Nunjucks
@@ -187,7 +180,7 @@ files, add `templateEngineOverride: njk,md` to the front matter
 ```
 
 ---
-# `_data` example part 2
+# `_data` usage
 
 `src/_includes/nav.njk`
 
@@ -239,7 +232,7 @@ tags: posts
 ---
 ```
 ---
-# Collections example part 2
+# Collections usage
 
 `index.md`
 ```md
@@ -247,10 +240,43 @@ tags: posts
 
 <ul>{% for post in collections.posts %}<li>
   <a href="{{ post.url }}">
-    {{ post.date | date: '%Y-%m-%d' }}: {{ post.data.title }}
+    {{ post.date | date }}: {{ post.data.title }}
   </a>
 </li>{% endfor %}</ul>
 ```
+---
+# Filters
+
+- [Built-in nunjucks filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters)
+- [url]() - prefix your URL
+- [slug]() - create slug from string
+- [get*CollectionItem]() - link to next/prev page
+
+---
+# Custom filters
+
+`.eleventy.js`
+```js
+const moment = require('moment');
+module.exports = (config) => {
+  config.addFilter('date', (date, format) => {
+    return moment(date).format(format || 'YYYY-MM-DD')
+  });
+  config.addFilter('scream', (str) => str.toUpperCase());
+  // ...additional config 
+  return { ... }
+};
+```
+---
+# Using filters
+
+In your template:
+
+```html
+{{ content | scream | safe }}`
+{{ page.date | date('YYYY-MM-DD') }}
+```
+
 ---
 # Personal example projects
 
